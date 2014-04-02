@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf8" />
+  <meta charset="utf8">
   <title>Lo-Dash web builder</title>
-  <meta name="viewport" content="width=device-width" />
-  <link rel="stylesheet" href="css/main.css" />
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <hgroup>
@@ -12,53 +12,53 @@
    <h2>Web builder <span>(wip)</span></h2>
   </hgroup>
 
-  <pre id="command" class="intro">
-    <code>lodash modern</code>
-  </pre>
-
   <form type="get" action="http://localhost:8080/build">
-    <div>
-      <label for="build">lodash build</label>
-      <input name="build" type="text" placeholder="modern" />
-    </div>
+    <table>
+    <tbody>
+      <tr>
+        <th><label for="build">lodash build</label></th>
+        <td><input name="build" type="text" placeholder="modern"></td>
+      </tr>
+
+      <tr>
+        <th><label for="category">category=</label></th>
+        <td><input name="category" type="text" placeholder="arrays,chaining,collections,functions,objects,utilities"></td>
+      </tr>
+
+      <tr>
+        <th><label for="exports">exports=</label></th>
+        <td><input name="exports" type="text" placeholder="amd,commonjs,global,node"></td>
+      </tr>
+
+      <tr>
+        <th><label for="iife">iife=</label></th>
+        <td><input name="iife" type="text" placeholder="!function(window,undefined){%output%}(this)"></td>
+      </tr>
+
+      <tr>
+        <th><label for="include">include=</label></th>
+        <td><input name="include" type="text" placeholder="each,filter,map"></td>
+      </tr>
+
+      <tr>
+        <th><label for="minus">minus=</label></th>
+        <td><input name="minus" type="text" placeholder="result,shuffle"></td>
+      </tr>
+
+      <tr>
+        <th><label for="plus">plus=</label></th>
+        <td><input name="plus" type="text" placeholder="random,template"></td>
+      </tr>
+
+      <tr>
+        <th><label for="moduleId">moduleId=</label></th>
+        <td><input name="moduleId" type="text" placeholder="lodash"></td>
+      </tr>
+    </tbody>
+    </table>
 
     <div>
-      <label for="category">category=</label>
-      <input name="category" type="text" placeholder="arrays,chaining,collections,functions,objects,utilities" />
-    </div>
-
-    <div>
-      <label for="exports">exports=</label>
-      <input name="exports" type="text" placeholder="amd,commonjs,global,node" />
-    </div>
-
-    <div>
-      <label for="iife">iife=</label>
-      <input name="iife" type="text" placeholder="!function(window,undefined){%output%}(this)" />
-    </div>
-
-    <div>
-      <label for="include">include=</label>
-      <input name="include" type="text" placeholder="each,filter,map" />
-    </div>
-
-    <div>
-      <label for="minus">minus=</label>
-      <input name="minus" type="text" placeholder="result,shuffle" />
-    </div>
-
-    <div>
-      <label for="plus">plus=</label>
-      <input name="plus" type="text" placeholder="random,template" />
-    </div>
-
-    <div>
-      <label for="moduleId">moduleId=</label>
-      <input name="moduleId" type="text" placeholder="lodash" />
-    </div>
-
-    <div>
-      <input type="submit" />
+      <input type="submit">
     </div>
   </form>
   
