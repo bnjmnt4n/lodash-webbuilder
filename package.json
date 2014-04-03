@@ -1,0 +1,23 @@
+{
+  "name": "lodash-webbuilder",
+  "version": "0.0.0",
+  "description": "lodash-webbuilder =================",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/d10/lodash-webbuilder.git"
+  },
+  "keywords": [
+    "lodash"
+  ],
+  "author": "Benjamin Tan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d10/lodash-webbuilder/issues"
+  },
+  "homepage": "https://github.com/d10/lodash-webbuilder"
+}
