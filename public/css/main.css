@@ -1,6 +1,6 @@
 /** based on lodash.com/_css/main.css */
 
-html,body,h1,h2,p {
+html, body, h1, h2, p {
     margin: 0;
     padding: 0;
 }
@@ -18,26 +18,15 @@ body {
     -webkit-box-shadow: 0 0 2.5em #5d656c;
     -moz-box-shadow: 0 0 2.5em #5d656c;
     box-shadow: 0 0 2.5em #5d656c;
-    font: 1em/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font: 1em/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
     min-height: 100%;
 }
 
 code {
-    font-family: Consolas,Courier New,monospace;
+    font-family: Consolas, Courier New, monospace;
 }
 
-pre {
-    background: #0d152a;
-    margin: 1em 0;
-    padding: .5em 40px;
-    word-wrap: break-word;
-}
-
-pre.intro {
-    font-size: 1.25em;
-}
-
-pre, hgroup span {
+hgroup span {
     color: #ddd;
 }
 
@@ -111,93 +100,29 @@ footer {
     padding-bottom: 1em;
 }
 
-.kw1,.kw3 {
-    color: #006;
-}
-
-.kw2 {
-    color: #036;
-}
-
-.co1 {
-    color: #060;
-}
-
-.co2 {
-    color: #096;
-}
-
-.br0 {
-    color: #090;
-}
-
-.sy0 {
-    color: #393;
-    font-weight: bold;
-}
-
-.st0 {
-    color: #36c;
-}
-
-.nu0 {
-    color: #c00;
-}
-
-.me1 {
-    color: #606;
-}
-
-pre .co1 {
-    color: #aeaeae;
-}
-
-.es0,pre .st0 {
-    color: #61ce3c;
-}
-
-pre .co2 {
-    color: #fff;
-}
-
-pre .nu0,pre .kw2,pre .kw3 {
-    color: #fbde2d;
-}
-
-pre .me1 {
-    color: #8da6ce;
-}
-
-pre .br0,pre .sy0,pre .kw1 {
-    color: #ddd;
-}
-
 /* FORMS */
 form {
     margin: 1.5em 40px 0;
     width: auto;
 }
 
-form label {
+form table {
+    width: 100%;
+}
+
+form th {
+    font-weight: normal;
+    width: 20%;
+}
+
+form th label {
     font-family: Consolas,Courier New,monospace;
-    float: left;
+    text-align: right;
 }
 
-form input:not([type="submit"]) {
-    float: right;
-    width: 80%;
+form td input {
+    width: 100%;
 }
-
-form div:before,
-form div:after {
-    content: " ";
-    display: table;
-}
-
-form div:after {
-    clear: both;
-}
-
 
 @media(max-width:959px) {
     body {
@@ -212,11 +137,6 @@ form div:after {
     h1,h2,h3,h4,p,ul,ol {
         padding: 0 10px;
     }
-
-    pre {
-        padding: 5px 10px !important;
-    }
-
 }
 
 @viewport {

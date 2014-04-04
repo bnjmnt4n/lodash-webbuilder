@@ -2,22 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="utf8">
-  <title>Lo-Dash web builder</title>
+  <title>Lo-Dash Web Builder</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <hgroup>
-   <h1>Lo-Dash <span>v2.4.1</span></h1>
-   <h2>Web builder <span>(wip)</span></h2>
+   <h1><a href="http://lodash.com/">Lo-Dash</a> <span>v2.4.1</span></h1>
+   <h2>Web Builder <span>(wip)</span></h2>
   </hgroup>
 
-  <form type="get" action="http://localhost:8080/build">
+  <p>
+    See the <a href="http://lodash.com/">Lo-Dash</a> <a href="http://lodash.com/custom-builds">custom builds</a> documentation for more information.<br>
+    All options do not require any quotations except for <code>iife</code>, where they are only required if using spaces.
+  </p>
+
+  <form type="get" action="/build">
     <table>
     <tbody>
       <tr>
-        <th><label for="build">lodash build</label></th>
-        <td><input name="build" type="text" placeholder="modern"></td>
+        <th><label for="modifier">modifier</label></th>
+        <td><input name="modifier" type="text" placeholder="modern"></td>
       </tr>
 
       <tr>
