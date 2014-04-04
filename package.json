@@ -1,7 +1,7 @@
 {
   "name": "lodash-webbuilder",
   "private": true,
-  "description": "lodash-webbuilder =================",
+  "description": "Web client for building Lo-Dash",
   "main": "server.js",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
