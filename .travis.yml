@@ -1,4 +1,9 @@
 language: node_js
 node_js:
-  - 0.10
+- 0.10
+deploy:
+  provider: heroku
+  api_key:
+    secure: L1IGPLjR0d4M4ShJRpmDd5iIC78yLgSdF3lkELkFZ238b6l9CRNw64ZCm73ECVqeRf36FoWk4hBfAtxOGfDjCOvXFgYxL6VRCKpX29vNisJ1yXGWuDDedOKUzfZ5iGB7NlrXHTIApgr7fyN+KgySpsTqLCmSGqnW6pawOutSMd8=
+  app: lodash-webbuilder
 install: true
