@@ -115,19 +115,42 @@ form {
 
 form table {
     width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+form tr {
+    padding: 10px 0;
+    border-bottom: 1px solid black;
 }
 
 form th {
     font-weight: normal;
-    width: 20%;
+    width: 15%;
+}
+
+form th:before,
+form th:after {
+    content: " ";
+    display: table;
+}
+
+form th:after {
+    clear: both;
 }
 
 form th label {
     font-family: Consolas,Courier New,monospace;
-    text-align: right;
+    float: right;
+    margin: 0 5px;
 }
 
-form td input {
+form td p {
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+form td input[type="text"] {
     width: 100%;
 }
 

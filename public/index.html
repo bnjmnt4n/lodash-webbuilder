@@ -23,48 +23,113 @@
     <table>
     <tbody>
       <tr>
-        <th><label for="modifier">Build Modifier</label></th>
-        <td><input name="modifier" type="text" placeholder="modern"></td>
+        <th>
+          <label for="modifier">modifier</label>
+        </th>
+        <td>
+          <select name="modifier">
+            <option value="compat" selected>compat</option>
+            <option value="modern">modern</option>
+            <option value="underscore">underscore</option>
+            <option value="backbone">backbone</option>
+            <option value="legacy">legacy</option>
+            <option value="mobile">mobile</option>
+            <option value="strict">strict</option>
+          </select>
+        </td>
       </tr>
 
       <tr>
-        <th><label for="category">category=</label></th>
-        <td><input name="category" type="text" placeholder="arrays,chaining,collections,functions,objects,utilities"></td>
+        <th>
+          <label for="category">category</label>
+        </th>
+        <td>
+          <p>
+            Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories (case-insensitive) are <em>“arrays”</em>, <em>“chaining”</em>, <em>“collections”</em>, <em>“functions”</em>, <em>“objects”</em>, &amp; <em>“utilities”</em>.
+          </p>
+          <input name="category" type="text" placeholder="arrays,chaining,collections,functions,objects,utilities">
+        </td>
       </tr>
 
       <tr>
-        <th><label for="exports">exports=</label></th>
-        <td><input name="exports" type="text" placeholder="amd,commonjs,global,node"></td>
+        <th>
+          <label for="exports">exports</label>
+        </th>
+        <td>
+          <p>
+            Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function.<br>Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“global”</em>, <em>“node”</em>, <em>“npm”</em>, &amp; <em>“none”</em>.
+          </p>
+          <input name="exports" type="text" placeholder="amd,commonjs,global,node">
+        </td>
       </tr>
 
       <tr>
-        <th><label for="iife">iife=</label></th>
-        <td><input name="iife" type="text" placeholder="!function(window,undefined){%output%}(this)"></td>
+        <th>
+          <label for="iife">iife</label>
+        </th>
+        <td>
+          <p>
+            Use the <code>iife</code> command to specify code to replace the <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> that wraps Lo-Dash.
+          </p>
+          <input name="iife" type="text" placeholder='"!function(window,undefined){%output%}(this)"'>
+        </td>
       </tr>
 
       <tr>
-        <th><label for="include">include=</label></th>
-        <td><input name="include" type="text" placeholder="each,filter,map"></td>
+        <th>
+          <label for="include">include</label>
+        </th>
+        <td>
+          <p>
+            Use the <code>include</code> command to pass comma separated names of functions to include in the build.
+          </p>
+          <input name="include" type="text" placeholder="each,filter,map">
+        </td>
       </tr>
 
       <tr>
-        <th><label for="minus">minus=</label></th>
-        <td><input name="minus" type="text" placeholder="result,shuffle"></td>
+        <th>
+          <label for="minus">minus</label>
+        </th>
+        <td>
+          <p>
+            Use the <code>minus</code> command to pass comma separated function/category names to remove from the build.
+          </p>
+          <input name="minus" type="text" placeholder="result,shuffle">
+        </td>
       </tr>
 
       <tr>
-        <th><label for="plus">plus=</label></th>
-        <td><input name="plus" type="text" placeholder="random,template"></td>
+        <th>
+          <label for="plus">plus</label>
+        </th>
+        <td>
+          <p>
+            Use the <code>plus</code> command to pass comma separated function/category names to add to the build.
+          </p>
+          <input name="plus" type="text" placeholder="random,template">
+        </td>
       </tr>
 
       <tr>
-        <th><label for="moduleId">moduleId=</label></th>
-        <td><input name="moduleId" type="text" placeholder="lodash"></td>
+        <th>
+          <label for="moduleId">moduleId</label>
+        </th>
+        <td>
+          <p>
+            Use the <code>moduleId</code> command to specify the AMD module ID for Lo-Dash.
+          </p>
+          <input name="moduleId" type="text" placeholder="lodash">
+        </td>
       </tr>
 
       <tr>
-        <th><label for="minify">Minify?</label></th>
-        <td><input name="minify" type="checkbox" checked></td>
+        <th>
+          <label for="minify">Minify?</label>
+        </th>
+        <td>
+          <input name="minify" type="checkbox" checked>
+        </td>
       </tr>
     </tbody>
     </table>
@@ -85,7 +150,7 @@
   </a>
   <script>
   // Add social links
-  !function(p,s,z,w,v,tU){var x,u="ghbtns.com/github-btn.html?user="+s+"&amp;repo="+z+"&amp;count=true&amp;type=",m="frameborder=0 scrolling=0 allowtransparency",r="iframe",d="script",i="twitter",t=p.getElementsByTagName(d)[0],y=p.getElementById(w);x=p.createElement(d);x.id=i+"-wjs";x.src = "//platform." + i + ".com/widgets.js";y.innerHTML="<"+r+' src="//'+u+'watch" width=80 height=20 '+m+"></"+r+"><"+r+' src="//'+u+'fork" width=80 height=20 '+m+"></"+r+'><a href="https://'+i+".com/"+tU+'" class='+i+"-follow-button data-show-count=false>Follow @"+tU+'</a><a href="https://'+i+'.com/share" class='+i+'-share-button data-text="'+v+'">Tweet</a>';t.parentNode.insertBefore(x,t)}(document,"d10","lodash-webbuilder","social","Lo-Dash Web Builder: Web client for building Lo-Dash","demoneaux");
+  !function(p,w,v,tU){var x,d="script",i="twitter",t=p.getElementsByTagName(d)[0],y=p.getElementById(w);x=p.createElement(d);x.id=i+"-wjs";x.src="//platform."+i+".com/widgets.js";y.innerHTML='<a href="https://'+i+".com/"+tU+'" class='+i+"-follow-button data-show-count=false>Follow @"+tU+'</a><a href="https://'+i+'.com/share" class='+i+'-share-button data-text="'+v+'">Tweet</a>';t.parentNode.insertBefore(x,t)}(document,"social","Lo-Dash Web Builder: Web client for building Lo-Dash","demoneaux");
   // Add Google Analytics
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-38386306-5','lodash-webbuilder.herokuapp.com');ga('send','pageview');
   </script>
