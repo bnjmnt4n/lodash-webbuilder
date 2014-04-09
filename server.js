@@ -1,4 +1,5 @@
-var port = Number(process.env.PORT)  || 8080;
+(function() {
+"use strict";
 
 /** Load Node.js modules */
 var http = require('http'),
@@ -6,13 +7,19 @@ var http = require('http'),
     parseURL = require('url').parse,
     spawn = require('child_process').spawn;
 
-var lodashCli = require('lodash-cli/package.json').bin.lodash;
-lodashCli = require.resolve('lodash-cli/' + lodashCli);
+/** Used as the location of the `lodash-cli` module */
+var lodashCli = require.resolve(
+  'lodash-cli/' + require('lodash-cli/package.json').bin.lodash
+);
 
+/** Load other modules */
 var ecstatic = require('ecstatic');
 
 /** Used as the static file server middleware */
 var mount = ecstatic({ root: path.join(__dirname, '/public'), cache: 3600, showDir: false });
+
+/** Used as the port number to run a server on */
+var port = Number(process.env.PORT)  || 8080;
 
 http.createServer(function(req, res) {
   var parsedURL = parseURL(req.url, true);
@@ -25,7 +32,7 @@ http.createServer(function(req, res) {
 
 
 /**
- * Build a Lo-Dash custom build.
+ * Builds a Lo-Dash custom build.
  *
  * @private
  * @param {IncomingRequest} req The request entering the server.
@@ -52,7 +59,8 @@ function buildLodash(req, res, query) {
     } else if (opt) {
       errors.push('Invalid option `' + optName + '`: ' + opt);
     }
-  };
+  }
+
   // minify?
   args.push(query.minify ? '--minify' : '--debug')
   args.push('--silent', '--stdout');
@@ -68,3 +76,5 @@ function buildLodash(req, res, query) {
     compiler.stderr.pipe(res);
   }
 }
+
+}.call(this));
