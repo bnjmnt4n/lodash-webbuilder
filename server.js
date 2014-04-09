@@ -44,10 +44,16 @@ function buildLodash(req, res, query) {
 
   // add Lo-Dash build modifier
   var modifier = query.modifier;
-  if (modifier && /^[a-z,]+$/i.test(modifier) && modifier != 'modularize') {
+  if (modifier && /^(?:compat|modern|underscore|backbone)$/i.test(modifier)) {
     args.push(modifier);
   } else if (modifier) {
     errors.push('Invalid modifier: ' + modifier);
+  }
+
+  // strict builds?
+  var isStrict = query.strictBuild;
+  if (isStrict == 'true') {
+    args.push('strict');
   }
 
   // add options
@@ -62,7 +68,7 @@ function buildLodash(req, res, query) {
   }
 
   // minify?
-  args.push(query.minify ? '--minify' : '--debug')
+  args.push(query.minify == 'true' ? '--minify' : '--debug')
   args.push('--silent', '--stdout');
   console.log(args);
 

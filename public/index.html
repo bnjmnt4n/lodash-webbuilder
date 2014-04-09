@@ -32,10 +32,19 @@
             <option value="modern">modern</option>
             <option value="underscore">underscore</option>
             <option value="backbone">backbone</option>
-            <option value="legacy">legacy</option>
-            <option value="mobile">mobile</option>
-            <option value="strict">strict</option>
           </select>
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          <label for="strictBuild">Strict?</label>
+        </th>
+        <td>
+          <p>
+            Build a strict build, with <a href="http://es5.github.io/#C">ES5 strict mode</a> enabled.
+          </p>
+          <input name="strictBuild" type="checkbox" value="true">
         </td>
       </tr>
 
@@ -128,7 +137,7 @@
           <label for="minify">Minify?</label>
         </th>
         <td>
-          <input name="minify" type="checkbox" checked>
+          <input name="minify" type="checkbox" value="true" checked>
         </td>
       </tr>
     </tbody>
