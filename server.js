@@ -13,22 +13,30 @@ var lodashCli = require.resolve(
 );
 
 /** Load other modules */
-var ecstatic = require('ecstatic');
+var ecstatic = require('ecstatic'),
+    through = require('through2');
 
 /** Used as the static file server middleware */
-var mount = ecstatic({ root: path.join(__dirname, '/public'), cache: 3600, showDir: false });
+var mount = ecstatic({
+  root: path.join(process.cwd(), '/public'),
+  cache: 3600,
+  showDir: false
+});
 
 /** Used as the port number to run a server on */
 var port = Number(process.env.PORT)  || 8080;
 
 http.createServer(function(req, res) {
+  console.log(req.url);
   var parsedURL = parseURL(req.url, true);
   if (parsedURL.pathname == '/build' && parsedURL.query) {
     buildLodash(req, res, parsedURL.query);
   } else {
     mount(req, res);
   }
-}).listen(port);
+}).listen(port, function() {
+  console.log('Listening on port ' + port);
+});
 
 
 /**
@@ -72,14 +80,31 @@ function buildLodash(req, res, query) {
   args.push('--silent', '--stdout');
   console.log(args);
 
-  res.setHeader('content-type', 'text/plain');
   if (errors.length) {
+    res.setHeader('Content-Type', 'text/plain');
     res.end(['ERROR:'].concat(errors).join('\n'))
   } else {
     var compiler = spawn('node', args);
 
-    compiler.stdout.pipe(res);
-    compiler.stderr.pipe(res);
+    var stream = through(function() {
+      var firstRun = true;
+      return function(chunk, enc, cb) {
+        if (firstRun) {
+          firstRun = false;
+          if (/\b@license\b/.test(chunk)) {
+            res.setHeader('Content-Type', 'application/javascript');
+          } else {
+            res.setHeader('Content-Type', 'text/plain');
+          }
+        }
+        this.push(chunk);
+        cb();
+      };
+    }());
+
+    compiler.stdout.pipe(stream);
+    compiler.stderr.pipe(stream);
+    stream.pipe(res);
   }
 }
 

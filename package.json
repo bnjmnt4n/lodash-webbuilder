@@ -5,7 +5,11 @@
   "homepage": "https://github.com/d10/lodash-webbuilder",
   "license": "MIT",
   "main": "server.js",
-  "keywords": ["lodash", "custom", "builds"],
+  "keywords": [
+    "lodash",
+    "custom",
+    "builds"
+  ],
   "author": "Benjamin Tan",
   "bugs": "https://github.com/d10/lodash-webbuilder/issues",
   "repository": "d10/lodash-webbuilder",
@@ -15,6 +19,7 @@
   },
   "dependencies": {
     "lodash-cli": "2.4.1",
-    "ecstatic": "0.5.1"
+    "ecstatic": "0.5.1",
+    "through2": "0.4.1"
   }
 }
