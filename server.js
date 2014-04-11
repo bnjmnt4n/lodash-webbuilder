@@ -91,7 +91,7 @@ function buildLodash(req, res, query) {
       return function(chunk, enc, cb) {
         if (firstRun) {
           firstRun = false;
-          if (/\b@license\b/.test(chunk)) {
+          if (/@license/.test(chunk.toString())) {
             res.setHeader('Content-Type', 'application/javascript');
           } else {
             res.setHeader('Content-Type', 'text/plain');
