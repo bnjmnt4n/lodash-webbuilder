@@ -91,9 +91,9 @@
             if (/@license/.test(string)) {
               string = string.replace(/--silent --stdout/, '-o lodash.' + modifier + '.js');
               chunk = new Buffer(string);
-              res.setHeader('Content-Type', 'application/javascript');
+              (noOfRuns == 1) && res.setHeader('Content-Type', 'application/javascript');
             } else {
-              res.setHeader('Content-Type', 'text/plain');
+              (noOfRuns == 1) && res.setHeader('Content-Type', 'text/plain');
             }
           }
           this.push(chunk);
