@@ -14,12 +14,15 @@
   "bugs": "https://github.com/d10/lodash-webbuilder/issues",
   "repository": "d10/lodash-webbuilder",
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0",
+    "test": "node test/tests.js",
     "start": "node server.js"
   },
   "dependencies": {
     "lodash-cli": "2.4.1",
     "ecstatic": "0.5.1",
     "through2": "0.4.1"
+  },
+  "devDependencies": {
+    "spec": "~1.0.1"
   }
 }
