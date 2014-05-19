@@ -12,8 +12,7 @@
   );
 
   /** Load other modules */
-  var ecstatic = require('ecstatic'),
-      through = require('through2');
+  var ecstatic = require('ecstatic');
 
   /** Used as the static file server middleware */
   var mount = ecstatic({
@@ -76,34 +75,13 @@
     args.push('--silent', '--stdout');
     console.log(args);
 
+    res.setHeader('Content-Type', 'text/plain');
     if (errors.length) {
-      res.setHeader('Content-Type', 'text/plain');
       res.end(['ERROR:'].concat(errors).join('\n'))
     } else {
       var compiler = spawn('node', args);
-
-      var stream = through(function() {
-        var noOfRuns = 0;
-        return function(chunk, enc, cb) {
-          noOfRuns++;
-          if (noOfRuns <= 2) {
-            var string = chunk.toString();
-            if (/@license/.test(string)) {
-              string = string.replace(/--silent --stdout/, '-o lodash.' + modifier + '.js');
-              chunk = new Buffer(string);
-              (noOfRuns == 1) && res.setHeader('Content-Type', 'application/javascript');
-            } else {
-              (noOfRuns == 1) && res.setHeader('Content-Type', 'text/plain');
-            }
-          }
-          this.push(chunk);
-          cb();
-        };
-      }());
-
-      compiler.stdout.pipe(stream);
-      compiler.stderr.pipe(stream);
-      stream.pipe(res);
+      compiler.stdout.pipe(res);
+      compiler.stderr.pipe(res);
     }
   }
 
