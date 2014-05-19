@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "lodash-cli": "2.4.1",
-    "ecstatic": "0.5.1",
-    "through2": "0.4.1"
+    "ecstatic": "0.5.1"
   }
 }
