@@ -14,7 +14,7 @@
   "bugs": "https://github.com/d10/lodash-webbuilder/issues",
   "repository": "d10/lodash-webbuilder",
   "scripts": {
-    "test": "node test/tests.js",
+    "test": "lab -v test/tests.js",
     "start": "node server.js"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "through2": "0.4.1"
   },
   "devDependencies": {
-    "spec": "~1.0.1"
+    "lab": "~3.1.1",
+    "supertest": "~0.12.1"
   }
 }
