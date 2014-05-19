@@ -40,6 +40,19 @@ describe('server', function () {
     });
   });
 
+  files = {
+    '404': fs.readFileSync(path.join(__dirname, '../public/404.html'), 'utf-8'),
+    'toTest': ['randomURL', '404url']
+  }
+  files.toTest.forEach(function (name) {
+    it('should return 404 for unknown URL `' + name + '`', function (done) {
+      request
+        .get('/' + name)
+        .expect('Content-Type', /^text\/html(?:; charset=.+)?$/)
+        .expect(200, files['404'], done);
+    });
+  });
+
   after(function (done) {
     request = null;
     done();
