@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 0.1
+- 0.10
 deploy:
   provider: heroku
   api_key:
@@ -8,4 +8,3 @@ deploy:
   app:
     master: lodash-webbuilder
     dev: lodash-webbuilder-dev
-install: true
