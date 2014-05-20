@@ -5,11 +5,6 @@
   "homepage": "https://github.com/d10/lodash-webbuilder",
   "license": "MIT",
   "main": "server.js",
-  "keywords": [
-    "lodash",
-    "custom",
-    "builds"
-  ],
   "author": "Benjamin Tan",
   "bugs": "https://github.com/d10/lodash-webbuilder/issues",
   "repository": "d10/lodash-webbuilder",
@@ -22,7 +17,7 @@
     "ecstatic": "0.5.1"
   },
   "devDependencies": {
-    "lab": "~3.1.1",
-    "supertest": "~0.12.1"
+    "lab": "3.1.1",
+    "supertest": "0.12.1"
   }
 }
