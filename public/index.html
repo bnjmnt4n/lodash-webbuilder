@@ -4,157 +4,174 @@
   <meta charset="utf8">
   <title>Lo-Dash Web Builder</title>
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <hgroup>
-   <h1><a href="http://lodash.com/">Lo-Dash</a> <span>v2.4.1</span></h1>
-   <h2>Web Builder</h2>
-  </hgroup>
+  <div class="outer">
+    <h1 class="center"><a href="http://lodash.com/">Lo-Dash</a> <span>v2.4.1</span></h1>
+    <h2 class="center">Web Builder</h2>
 
-  <p>
-    See the <a href="http://lodash.com/">Lo-Dash</a> <a href="http://lodash.com/custom-builds">custom builds</a> documentation for more information.<br>
-    All options do not require any quotations except for the <code>iife</code> option.
-  </p>
+    <div class="inner">
+      <p>
+        See the <a href="http://lodash.com/">Lo-Dash</a> <a href="http://lodash.com/custom-builds">custom builds</a> documentation for more information.<br>
+        All options do not require any quotations except for the <code>iife</code> option.
+      </p>
 
-  <p>
-    Note: Some builds might not succeed in time for Heroku's time limits, and might cause Request Timeouts.<br>
-    In that case, you might want to retry the build by reloading a few times.
-  </p>
+      <p>
+        Note: Some builds might not succeed in time for Heroku's time limits, and might cause Request Timeouts.<br>
+        In that case, you might want to retry the build by reloading a few times.
+      </p>
 
-  <p id="social"></p>
+      <p id="social"></p>
+    </div>
+  </div>
 
   <form type="get" action="/build">
-    <table>
-    <tbody>
-      <tr>
-        <th>
-          <label for="modifier">modifier</label>
-        </th>
-        <td>
+    <div class="outer">
+      <div class="inner">
+        <h2>modifier</h2>
+        <div>
           <select name="modifier">
             <option value="compat" selected>compat</option>
             <option value="modern">modern</option>
             <option value="underscore">underscore</option>
             <option value="backbone">backbone</option>
           </select>
-        </td>
-      </tr>
+        </div>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="strictBuild">Strict?</label>
-        </th>
-        <td>
-          <p>
-            Build a strict build, with <a href="http://es5.github.io/#C">ES5 strict mode</a> enabled.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>strict</h2>
+        <div>
           <input name="strictBuild" type="checkbox" value="true">
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Build a strict build, with <a href="http://es5.github.io/#C">ES5 strict mode</a> enabled.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="category">category</label>
-        </th>
-        <td>
-          <p>
-            Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories (case-insensitive) are <em>“arrays”</em>, <em>“chaining”</em>, <em>“collections”</em>, <em>“functions”</em>, <em>“objects”</em>, &amp; <em>“utilities”</em>.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>category</h2>
+        <div>
           <input name="category" type="text" placeholder="arrays,chaining,collections,functions,objects,utilities">
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories (case-insensitive) are <em>“arrays”</em>, <em>“chaining”</em>, <em>“collections”</em>, <em>“functions”</em>, <em>“objects”</em>, &amp; <em>“utilities”</em>.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="exports">exports</label>
-        </th>
-        <td>
-          <p>
-            Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function.<br>Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“global”</em>, <em>“node”</em>, &amp; <em>“none”</em>.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>exports</h2>
+        <div>
           <input name="exports" type="text" placeholder="amd,commonjs,global,node">
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function.<br>Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“global”</em>, <em>“node”</em>, &amp; <em>“none”</em>.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="iife">iife</label>
-        </th>
-        <td>
-          <p>
-            Use the <code>iife</code> command to specify code to replace the <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> that wraps Lo-Dash.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>iife</h2>
+        <div>
           <input name="iife" type="text" placeholder='"!function(window,undefined){%output%}(this)"'>
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Use the <code>iife</code> command to specify code to replace the <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> that wraps Lo-Dash.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="include">include</label>
-        </th>
-        <td>
-          <p>
-            Use the <code>include</code> command to pass comma separated names of functions to include in the build.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>include</h2>
+        <div>
           <input name="include" type="text" placeholder="each,filter,map">
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Use the <code>include</code> command to pass comma separated names of functions to include in the build.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="minus">minus</label>
-        </th>
-        <td>
-          <p>
-            Use the <code>minus</code> command to pass comma separated function/category names to remove from the build.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>minus</h2>
+        <div>
           <input name="minus" type="text" placeholder="result,shuffle">
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Use the <code>minus</code> command to pass comma separated function/category names to remove from the build.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="plus">plus</label>
-        </th>
-        <td>
-          <p>
-            Use the <code>plus</code> command to pass comma separated function/category names to add to the build.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>plus</h2>
+        <div>
           <input name="plus" type="text" placeholder="random,template">
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Use the <code>plus</code> command to pass comma separated function/category names to add to the build.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="moduleId">moduleId</label>
-        </th>
-        <td>
-          <p>
-            Use the <code>moduleId</code> command to specify the AMD module ID for Lo-Dash.
-          </p>
+    <div class="outer">
+      <div class="inner">
+        <h2>moduleId</h2>
+        <div>
           <input name="moduleId" type="text" placeholder="lodash">
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div class="inner">
+        <p>
+          Use the <code>moduleId</code> command to specify the AMD module ID for Lo-Dash.
+        </p>
+      </div>
+    </div>
 
-      <tr>
-        <th>
-          <label for="minify">Minify?</label>
-        </th>
-        <td>
+    <div class="outer">
+      <div class="inner">
+        <h2>minify</h2>
+        <div>
           <input name="minify" type="checkbox" value="true" checked>
-        </td>
-      </tr>
-    </tbody>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <div>
-      <input type="submit">
+    <div class="outer">
+      <div class="inner">
+        <input type="submit">
+      </div>
     </div>
   </form>
   
-  <footer>
-    <p>
+  <footer class="outer">
+    <p class="inner center">
       <a href="http://lodash.com">Lo-Dash</a> by <a href="http://allyoucanleet.com/">John-David Dalton</a>, <a href="http://www.iceddev.com/">Blaine Bublitz</a>, <a href="http://kitcambridge.be/">Kit Cambridge</a>, &amp; <a href="http://mathiasbynens.be/">Mathias Bynens</a><br>
       <a href="/">Lo-Dash Web Builder</a> by <a href="http://d10.github.io/">Benjamin Tan</a>
     </p>
