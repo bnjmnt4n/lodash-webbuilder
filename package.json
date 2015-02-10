@@ -1,7 +1,7 @@
 {
   "name": "lodash-webbuilder",
   "private": true,
-  "description": "Web client for building Lo-Dash",
+  "description": "Web client for building lodash",
   "homepage": "https://github.com/d10/lodash-webbuilder",
   "license": "MIT",
   "main": "server.js",
@@ -18,8 +18,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "lodash-cli": "2.4.1",
-    "ecstatic": "0.5.1",
-    "through2": "0.4.1"
+    "lodash-cli": "3.1.1",
+    "ecstatic": "0.5.8",
+    "through2": "0.6.3"
   }
 }
