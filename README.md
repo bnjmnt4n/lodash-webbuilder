@@ -1,6 +1,6 @@
 # [lodash-webbuilder](http://lodash-webbuilder.herokuapp.com/) [![Build Status](https://travis-ci.org/d10/lodash-webbuilder.svg?branch=master)](https://travis-ci.org/d10/lodash-webbuilder)
 
-Web client for building [Lo-Dash](http://lodash.com/).
+Web client for building [lodash](http://lodash.com/).
 
 See the [live version](http://lodash-webbuilder.herokuapp.com/).
 
@@ -17,10 +17,11 @@ See the [live version](http://lodash-webbuilder.herokuapp.com/).
    ```bash
    $ npm start
    ```
+
 4. [Enjoy](http://localhost:8080/)!
 
 ## Author
 
-| [![twitter/demoneaux](http://gravatar.com/avatar/029b19dba521584d83398ada3ecf6131?s=70)](https://twitter.com/demoneaux "Follow @demoneaux on Twitter") |
+| [![twitter/demoneaux](https://gravatar.com/avatar/029b19dba521584d83398ada3ecf6131?s=70)](https://twitter.com/demoneaux "Follow @demoneaux on Twitter") |
 |---|
-| [Benjamin Tan](http://d10.github.io/) |
+| [Benjamin Tan](https://d10.github.io/) |
