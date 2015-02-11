@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-- 0.10
+  - '0.10'
 deploy:
   provider: heroku
   api_key:
-    secure: rN4fgnFyV/ESpE8BBWadAjUX6y8mvSxCJ456A5WxwHRL4h0zSKia+9YARBjoAgMDSYUZgygz3IwNtaQ1vMBAk3r9uur/OEy5mMDGEMGu37PmYGcMiNSU/+SScox9M80xACsDkkG1V7vzfvgxVJmG63GhWMnfE6JzpKlnidO0zog=
+    secure: ARlSpMMqNnqJVjKAYLAJ4rl2ssH+kEegrsSLx3bpPWvldd8qn4leW0zL1OXInRoiT/vJiBKJ2aDxNEKjuLPIdixXqGHKhKY0S5jvqTeAbXZMOMACS+CmnzqO/d0rD314b8fD78j3cXE0g59/jv0LyNNimeMHLtsjGt44WNhZYmk=
   app:
     master: lodash-webbuilder
     dev: lodash-webbuilder-dev
