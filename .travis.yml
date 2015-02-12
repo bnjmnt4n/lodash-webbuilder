@@ -8,4 +8,3 @@ deploy:
   app:
     master: lodash-webbuilder
     dev: lodash-webbuilder-dev
-install: true
