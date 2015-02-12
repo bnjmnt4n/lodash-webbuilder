@@ -12,8 +12,7 @@
   );
 
   /** Load other modules */
-  var ecstatic = require('ecstatic'),
-      through = require('through2');
+  var ecstatic = require('ecstatic');
 
   /** Used as the static file server middleware */
   var mount = ecstatic({
@@ -36,7 +35,7 @@
   }
 
   /**
-   * Builds a Lo-Dash custom build.
+   * Builds a lodash custom build.
    *
    * @private
    * @param {IncomingRequest} req The request entering the server.
@@ -46,9 +45,9 @@
   function buildLodash(req, res, query) {
     var args = [lodashCli], errors = [];
 
-    // add Lo-Dash build modifier
+    // add lodash build modifier
     var modifier = query.modifier;
-    if (modifier && /^(?:compat|modern|underscore|backbone)$/i.test(modifier)) {
+    if (modifier && /^(?:compat|modern)$/i.test(modifier)) {
       args.push(modifier);
     } else if (modifier) {
       errors.push('Invalid modifier: ' + modifier);
@@ -72,38 +71,17 @@
     }
 
     // minify?
-    args.push(query.minify == 'true' ? '--minify' : '--debug')
+    args.push(query.minify == 'true' ? '--production' : '--development')
     args.push('--silent', '--stdout');
     console.log(args);
 
+    res.setHeader('Content-Type', 'text/plain');
     if (errors.length) {
-      res.setHeader('Content-Type', 'text/plain');
       res.end(['ERROR:'].concat(errors).join('\n'))
     } else {
       var compiler = spawn('node', args);
-
-      var stream = through(function() {
-        var noOfRuns = 0;
-        return function(chunk, enc, cb) {
-          noOfRuns++;
-          if (noOfRuns <= 2) {
-            var string = chunk.toString();
-            if (/@license/.test(string)) {
-              string = string.replace(/--silent --stdout/, '-o lodash.' + modifier + '.js');
-              chunk = new Buffer(string);
-              (noOfRuns == 1) && res.setHeader('Content-Type', 'application/javascript');
-            } else {
-              (noOfRuns == 1) && res.setHeader('Content-Type', 'text/plain');
-            }
-          }
-          this.push(chunk);
-          cb();
-        };
-      }());
-
-      compiler.stdout.pipe(stream);
-      compiler.stderr.pipe(stream);
-      stream.pipe(res);
+      compiler.stdout.pipe(res);
+      compiler.stderr.pipe(res);
     }
   }
 
