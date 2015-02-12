@@ -13,11 +13,11 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "hapi": "8.2.0",
     "lodash-cli": "3.1.1",
-    "ecstatic": "0.5.8"
+    "through2": "0.6.3"
   },
   "devDependencies": {
-    "lab": "5.2.1",
-    "supertest": "0.15.0"
+    "lab": "5.2.1"
   }
 }

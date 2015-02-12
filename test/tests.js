@@ -2,23 +2,17 @@ var http = require('http'),
     path = require('path'),
     fs = require('fs');
 
-var lab = require('lab'),
-    supertest = require('supertest');
+var lab = exports.lab = require('lab').script(),
+    assert = require('assert');
 
 var describe = lab.experiment,
     it = lab.test,
     before = lab.before,
     after = lab.after;
 
-var app = require('../server'),
-    request;
+var server = require('../server');
 
 describe('server', function () {
-  before(function (done) {
-    request = supertest(app);
-    done();
-  });
-
   var contentTypes = {
     'text': /^text\/plain(?:; charset=.+)?$/,
     'html': /^text\/html(?:; charset=.+)?$/,
@@ -39,10 +33,12 @@ describe('server', function () {
   files.forEach(function (file) {
     var name = file.name;
     it('should return correct files for `' + name + '`', function (done) {
-      request
-        .get('/' + name)
-        .expect('Content-Type', file.type)
-        .expect(200, file.contents, done);
+      server.inject('/' + name, function (res) {
+        assert.equal(res.statusCode, 200, 'Status code');
+        assert(file.type.test(res.headers['content-type']), 'File type');
+        assert.equal(file.contents, res.rawPayload.toString('utf8'), 'File contents');
+        done();
+      });
     });
   });
 
@@ -123,9 +119,4 @@ describe('server', function () {
     });
   });
   */
-
-  after(function (done) {
-    request = null;
-    done();
-  });
 });

@@ -1,97 +1,122 @@
-(function() {
-  "use strict";
+"use strict";
 
-  /** Load Node.js modules */
-  var path = require('path'),
-      parseURL = require('url').parse,
-      spawn = require('child_process').spawn;
+/** Load Node.js modules */
+var path = require('path'),
+    parseURL = require('url').parse,
+    spawn = require('child_process').spawn;
 
-  /** Used as the location of the `lodash-cli` module */
-  var lodashCli = require.resolve(
-    'lodash-cli/' + require('lodash-cli/package.json').bin.lodash
-  );
+/** Load other modules */
+var hapi = require('hapi'),
+    through = require('through2');
 
-  /** Load other modules */
-  var ecstatic = require('ecstatic');
+/** Used as the location of the `lodash-cli` module */
+var lodashCli = require.resolve(
+  'lodash-cli/' + require('lodash-cli/package.json').bin.lodash
+);
 
-  /** Used as the static file server middleware */
-  var mount = ecstatic({
-    root: path.join(process.cwd(), '/public'),
-    cache: 3600,
-    showDir: false
-  });
+/** Used as the port number to run a server on */
+var port = Number(process.env.PORT)  || 8080;
 
-  /** Used as the port number to run a server on */
-  var port = Number(process.env.PORT)  || 8080;
-
-  function reqListener(req, res) {
-    console.log(req.url);
-    var parsedURL = parseURL(req.url, true);
-    if (parsedURL.pathname == '/build' && parsedURL.query) {
-      buildLodash(req, res, parsedURL.query);
-    } else {
-      mount(req, res);
-    }
-  }
-
-  /**
-   * Builds a lodash custom build.
-   *
-   * @private
-   * @param {IncomingRequest} req The request entering the server.
-   * @param {ServerResponse} res The server response object.
-   * @param {Object} query The parsed query string object.
-   */
-  function buildLodash(req, res, query) {
-    var args = [lodashCli], errors = [];
-
-    // add lodash build modifier
-    var modifier = query.modifier;
-    if (modifier && /^(?:compat|modern)$/i.test(modifier)) {
-      args.push(modifier);
-    } else if (modifier) {
-      errors.push('Invalid modifier: ' + modifier);
-    }
-
-    // strict builds?
-    var isStrict = query.strictBuild;
-    if (isStrict == 'true') {
-      args.push('strict');
-    }
-
-    // add options
-    var opts = ['category', 'exports', 'iife', 'include', 'plus', 'minus', 'moduleId'];
-    for (var length = opts.length, i = 0; i < length; i++) {
-      var optName = opts[i], opt = query[optName];
-      if (opt && (optName == 'iife' ? /^"([^"]+)"$/.test(opt) : /^[a-z,]+$/i.test(opt))) {
-        args.push(optName + '=' + opt);
-      } else if (opt) {
-        errors.push('Invalid option `' + optName + '`: ' + opt);
+// Create a server with a host and port
+var server = new hapi.Server({
+  connections: {
+    routes: {
+      files: {
+        relativeTo: __dirname
       }
     }
+  }
+});
 
-    // minify?
-    args.push(query.minify == 'true' ? '--production' : '--development')
-    args.push('--silent', '--stdout');
-    console.log(args);
+server.connection({
+  port: port
+});
 
-    res.setHeader('Content-Type', 'text/plain');
-    if (errors.length) {
-      res.end(['ERROR:'].concat(errors).join('\n'))
-    } else {
-      var compiler = spawn('node', args);
-      compiler.stdout.pipe(res);
-      compiler.stderr.pipe(res);
+server.route({
+  method: 'GET',
+  path: '/build',
+  handler: buildLodash
+});
+
+server.route({
+  method: 'GET',
+  path: '/{param*}',
+    handler: {
+    directory: {
+      path: 'public'
+    }
+  }
+});
+
+/**
+ * Builds a lodash custom build.
+ *
+ * @private
+ * @param {IncomingRequest} request The request entering the server.
+ * @param {ServerResponse} reply The server response object.
+ */
+function buildLodash(request, reply) {
+  var query = request.query, args = [lodashCli], errors = [];
+
+  // add lodash build modifier
+  var modifier = query.modifier;
+  if (modifier && /^(?:compat|modern)$/i.test(modifier)) {
+    args.push(modifier);
+  } else if (modifier) {
+    errors.push('Invalid modifier: ' + modifier);
+  }
+
+  // strict builds?
+  var isStrict = query.strictBuild;
+  if (isStrict == 'true') {
+    args.push('strict');
+  }
+
+  // add options
+  var opts = ['category', 'exports', 'iife', 'include', 'plus', 'minus', 'moduleId'];
+  for (var length = opts.length, i = 0; i < length; i++) {
+    var optName = opts[i], opt = query[optName];
+    if (opt && (optName == 'iife' ? /^"([^"]+)"$/.test(opt) : /^[a-z,]+$/i.test(opt))) {
+      args.push(optName + '=' + opt);
+    } else if (opt) {
+      errors.push('Invalid option `' + optName + '`: ' + opt);
     }
   }
 
-  if (!module.parent) {
-    var http = require('http');
-    http.createServer(reqListener).listen(port, function() {
-      console.log('Listening on port ' + port);
-    });
-  } else {
-    module.exports = reqListener;
-  }
+  // minify?
+  args.push(query.minify == 'true' ? '--production' : '--development')
+  args.push('--silent', '--stdout');
+  console.log(args);
 
-}.call(this));
+  if (errors.length) {
+    reply(
+    ['ERROR:'].concat(errors).join('\n')
+    ).type('text');
+  } else {
+    var stream = through(function() {
+      var noOfRuns = 0;
+      return function(chunk, enc, cb) {
+        if (noOfRuns++ <= 2) {
+          var string = chunk.toString();
+          if (/@license/.test(string)) {
+            string = string.replace(/--silent --stdout/, '-o lodash.' + modifier + '.js');
+            chunk = new Buffer(string);
+          }
+        }
+        this.push(chunk);
+        cb();
+      };
+    }());
+    var compiler = spawn('node', args);
+    compiler.stdout.pipe(stream);
+    compiler.stderr.pipe(stream);
+    
+    reply(stream).type('text');
+  }
+}
+
+if (!module.parent) {
+  server.start();
+} else {
+  module.exports = server;
+}
