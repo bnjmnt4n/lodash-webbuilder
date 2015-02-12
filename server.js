@@ -35,7 +35,7 @@
   }
 
   /**
-   * Builds a Lo-Dash custom build.
+   * Builds a lodash custom build.
    *
    * @private
    * @param {IncomingRequest} req The request entering the server.
@@ -45,9 +45,9 @@
   function buildLodash(req, res, query) {
     var args = [lodashCli], errors = [];
 
-    // add Lo-Dash build modifier
+    // add lodash build modifier
     var modifier = query.modifier;
-    if (modifier && /^(?:compat|modern|underscore|backbone)$/i.test(modifier)) {
+    if (modifier && /^(?:compat|modern)$/i.test(modifier)) {
       args.push(modifier);
     } else if (modifier) {
       errors.push('Invalid modifier: ' + modifier);
@@ -71,7 +71,7 @@
     }
 
     // minify?
-    args.push(query.minify == 'true' ? '--minify' : '--debug')
+    args.push(query.minify == 'true' ? '--production' : '--development')
     args.push('--silent', '--stdout');
     console.log(args);
 
