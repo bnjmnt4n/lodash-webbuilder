@@ -1,23 +1,23 @@
 {
   "name": "lodash-webbuilder",
   "private": true,
-  "description": "Web client for building lodash",
+  "description": "Web client for building lodash.",
   "homepage": "https://github.com/d10/lodash-webbuilder",
   "license": "MIT",
   "main": "server.js",
-  "author": "Benjamin Tan",
-  "bugs": "https://github.com/d10/lodash-webbuilder/issues",
+  "author": "Benjamin Tan <demoneaux@gmail.com> (https://d10.github.io/)",
   "repository": "d10/lodash-webbuilder",
+  "bugs": "https://github.com/d10/lodash-webbuilder/issues",
   "scripts": {
     "test": "lab -v test/tests.js",
     "start": "node server.js"
   },
   "dependencies": {
-    "hapi": "8.2.0",
-    "lodash-cli": "3.1.1",
-    "through2": "0.6.3"
+    "hapi": "8.4.0",
+    "lodash-cli": "3.7.0",
+    "through2": "0.6.5"
   },
   "devDependencies": {
-    "lab": "5.2.1"
+    "lab": "5.5.1"
   }
 }
