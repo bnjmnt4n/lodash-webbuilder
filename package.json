@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "hapi": "8.4.0",
-    "lodash-cli": "3.7.0",
+    "lodash-cli": "3.8.0",
     "through2": "0.6.5"
   },
   "devDependencies": {
-    "lab": "5.5.1"
+    "lab": "5.8.1"
   }
 }

@@ -41,10 +41,23 @@ server.route({
 server.route({
   method: 'GET',
   path: '/{param*}',
-    handler: {
+  handler: {
     directory: {
       path: 'public'
     }
+  }
+});
+
+server.ext('onPreResponse', function (request, reply) {
+  var response = request.response;
+  if (!response.isBoom) {
+    return reply.continue();
+  }
+
+  // 404
+  var error = response;
+  if (error.output.statusCode == 404) {
+    return reply.file('_files/404.html').type('text/html').code(404);
   }
 });
 
@@ -55,7 +68,7 @@ server.route({
  * @param {IncomingRequest} request The request entering the server.
  * @param {ServerResponse} reply The server response object.
  */
-function buildLodash(request, reply) {
+function buildLodash (request, reply) {
   var query = request.query, args = [lodashCli], errors = [];
 
   // add lodash build modifier

@@ -35,27 +35,32 @@ describe('server', function () {
     it('should return correct files for `' + name + '`', function (done) {
       server.inject('/' + name, function (res) {
         assert.equal(res.statusCode, 200, 'Status code');
-        assert(file.type.test(res.headers['content-type']), 'File type');
+        var fileType = res.headers['content-type'];
+        assert(file.type.test(fileType), 'File type: ' + fileType);
         assert.equal(file.contents, res.rawPayload.toString('utf8'), 'File contents');
         done();
       });
     });
   });
 
-  /*
   files = {
-    '404': fs.readFileSync(path.join(__dirname, '../public/404.html'), 'utf-8'),
-    'toTest': ['randomURL', '404url']
-  }
+    'contents': fs.readFileSync(path.join(__dirname, '../_files/404.html'), 'utf-8'),
+    'toTest': ['randomURL', '404url'],
+    'type': contentTypes.html
+  };
   files.toTest.forEach(function (name) {
     it('should return 404 for unknown URL `' + name + '`', function (done) {
-      request
-        .get('/' + name)
-        .expect('Content-Type', contentTypes.html)
-        .expect(404, files['404'], done);
+      server.inject('/' + name, function (res) {
+        assert.equal(res.statusCode, 404, 'Status code');
+        var fileType = res.headers['content-type'];
+        assert(files.type.test(fileType), 'File type: ' + fileType);
+        assert.equal(files.contents, res.rawPayload.toString('utf8'), 'File contents');
+        done();
+      });
     });
   });
 
+  /*
   files = {
     'contents':
       ['/**',
