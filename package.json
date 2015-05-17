@@ -9,8 +9,9 @@
   "repository": "d10/lodash-webbuilder",
   "bugs": "https://github.com/d10/lodash-webbuilder/issues",
   "scripts": {
-    "test": "lab -v test/tests.js",
-    "start": "node server.js"
+    "postinstall": "java -version" ,
+    "start": "node server.js",
+    "test": "lab -v test/tests.js"
   },
   "dependencies": {
     "hapi": "8.4.0",
